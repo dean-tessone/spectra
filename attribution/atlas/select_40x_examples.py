@@ -8,7 +8,7 @@ ok = pd.read_csv(A / '40x_extraction_status.csv'); ok = set(ok.cell_key[ok.ok])
 c = pd.read_parquet(REPO / 'runs/figure3_locked6_attribution_20261111/all_cells.parquet', columns=['donor_id', 'cancer_types', 'slide_id', 'source_row', 'relevance', 'positive_rank', 'TRITC_mean', 'CY5_mean', 'FITC_mean', 'DAPI_mean'])
 c['cell_key'] = [f'{s}_r{int(r):05d}' for s, r in zip(c.slide_id, c.source_row)]
 rows = []
-for d in pd.read_csv(A / 'fig4_ckneg_examples_private.csv', dtype=str).donor_id:
+for d in pd.read_csv(A / 'fig4_ckneg_examples_private.csv', dtype=str).donor_id:   # four detected CK-negative cancers (private: patient IDs)
     g = c[(c.donor_id == d) & c.cell_key.isin(ok)].nsmallest(7, 'positive_rank')
     rows.append(g.assign(panel='fig4_ckneg_40x', example=d, rank=range(1, len(g) + 1)))
 for task in ['lung', 'breast']:
