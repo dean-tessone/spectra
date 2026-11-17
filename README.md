@@ -53,7 +53,7 @@ The release contains no patient identifiers, no clinical information other than 
 | `imaging/` | Cell-image extraction and display transform |
 | `cohort/` | Control-population policy and manuscript tables |
 | `data_release/` | Export of the Zenodo release |
-| `figures/` | Final figures (`main/`, `extended_data/`, `supplementary/`; PDF, SVG and PNG), legends and figure code (`code/`) |
+| `figures/` | Final figures (`main/`, `supplementary/`; PDF, SVG and PNG), legends and figure code (`code/`) |
 
 Each analysis folder writes its outputs to `runs/` and `analyses/`. These folders are not part of the repository.
 

@@ -1,4 +1,4 @@
-"""Extended Data Fig. 1 - training-CV benchmark, score diagnostics and acquisition batch checks."""
+"""Supplementary Fig. 2 - training-CV benchmark, score diagnostics and acquisition batch checks."""
 import numpy as np
 import pandas as pd
 from scipy.special import logit as _logit
@@ -60,7 +60,7 @@ def build():
         d.bar(np.arange(4) + off, frac * 100, width=.34, color=col)
     d.set_xticks(range(4)); d.set_xticklabels(['0/3', '1/3', '2/3', '3/3']); d.set_xlabel('Seeds with probability >0.5')
     d.set_ylabel('Patients (%)'); d.set_ylim(0, 100)
-    (sx.ROOT / 'extended_data_1/seed_saturation.txt').write_text(f'{sat:.4f}\n')
+    (sx.ROOT / 'supplementary/SupplementaryFig2_seed_saturation.txt').write_text(f'{sat:.4f}\n')
     from matplotlib.patches import Patch
     d.legend(handles=[Patch(fc=SPECTRA, label='Cancers'), Patch(fc=CONTROL, label='Controls')], loc='upper left', bbox_to_anchor=(0, .80), fontsize=5.6, handlelength=1)
 
@@ -99,10 +99,10 @@ def build():
     q.set_yticks(range(len(rows))); q.set_yticklabels([r[0] for r in rows], fontsize=5.6, linespacing=1.15); q.set_ylim(len(rows) - .4, -.6)
     q.tick_params(axis='y', length=0); q.spines['left'].set_visible(False)
     q.set_xlim(.5, 1.0); q.set_xticks([.5, .75, 1.0]); q.set_xlabel('Test AUROC')
-    pd.DataFrame([dict(comparison=l.replace('\n', ' '), auroc=v) for l, v in rows]).to_csv(sx.ROOT / 'extended_data_1/batch_check_source.csv', index=False)
-    sx.export(pg, 'extended_data_1', 'ExtendedData1', row_groups=[['a', 'b', 'c'], ['d', 'e', 'f']], column_groups=[['a', 'd'], ['b', 'e'], ['c', 'f']],
+    pd.DataFrame([dict(comparison=l.replace('\n', ' '), auroc=v) for l, v in rows]).to_csv(sx.ROOT / 'supplementary/SupplementaryFig2_batch_check_source.csv', index=False)
+    sx.export(pg, 'supplementary', 'SupplementaryFig2_benchmark_and_checks', row_groups=[['a', 'b', 'c'], ['d', 'e', 'f']], column_groups=[['a', 'd'], ['b', 'e'], ['c', 'f']],
               exemptions=[dict(panels=['a', 'b', 'c', 'd', 'e', 'f'], checks=['panel-width', 'horizontal-gutter'], reason='category-label widths differ by panel; tops/heights aligned per row')])
-    f.to_csv(sx.ROOT / 'extended_data_1/fold_AUROC_source.csv', index=False)
+    f.to_csv(sx.ROOT / 'supplementary/SupplementaryFig2_fold_AUROC_source.csv', index=False)
 
 
 if __name__ == '__main__':

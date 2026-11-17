@@ -1,4 +1,4 @@
-"""Supplementary Fig. 5 - what the main high-attention clusters are: per-cell imaging mass cytometry (a) and
+"""Supplementary Fig. 6 - what the main high-attention clusters are: per-cell imaging mass cytometry (a) and
 single-cell low-pass WGS copy-number profiles (b). Data: validation/single_cell_cnv/figure_data.py per_cell
 (no patient identifiers)."""
 import json
@@ -144,9 +144,9 @@ def build():
     cb = pg.ax(hx, btop - .2, .9, .07); cb.imshow(np.linspace(-1, 1, 100)[None], aspect='auto', cmap=CMAP); cb.set_yticks([])
     cb.set_xticks([0, 49.5, 99]); cb.set_xticklabels(['−1', '0', '+1'], fontsize=5.6); cb.tick_params(length=1.5, pad=1)
     pg.text(hx + .98, btop - .23, 'Copy number, log2 ratio to cell median;\nrows, cells; lines separate patients', fontsize=5.6, linespacing=1.05)
-    sx.export(pg, 'supplementary', 'SupplementaryFig5_cluster_biology', column_groups=[[f'b{c}' for c in ORDER if (cl == c).any()]])
-    I.to_csv(sx.ROOT / 'supplementary/SupplementaryFig5_imc_cells_source.csv', index=False)
-    pd.DataFrame(dict(cluster=cl, patient_index=pid, cancer_type=canc, altered=alt)).to_csv(sx.ROOT / 'supplementary/SupplementaryFig5_sequenced_cells_source.csv', index=False)
+    sx.export(pg, 'supplementary', 'SupplementaryFig6_cluster_biology', column_groups=[[f'b{c}' for c in ORDER if (cl == c).any()]])
+    I.to_csv(sx.ROOT / 'supplementary/SupplementaryFig6_imc_cells_source.csv', index=False)
+    pd.DataFrame(dict(cluster=cl, patient_index=pid, cancer_type=canc, altered=alt)).to_csv(sx.ROOT / 'supplementary/SupplementaryFig6_sequenced_cells_source.csv', index=False)
 
 
 if __name__ == '__main__':

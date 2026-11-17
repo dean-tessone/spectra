@@ -1,4 +1,4 @@
-"""Supplementary Fig. 4 - imaging mass cytometry (IMC) of selected high-attention cells.
+"""Supplementary Fig. 7 - imaging mass cytometry (IMC) of selected high-attention cells.
 
 Tiles are produced by validation/imc/gallery.py export (OpenIMC venv: IF->IMC registration, OpenIMC
 raw counts for display (no hot-pixel removal), arcsinh, one fixed display window per marker per slide, Cellpose/OpenIMC cell outline),
@@ -71,8 +71,8 @@ def build():
             for s in ax_.spines.values():
                 s.set_visible(True); s.set_linewidth(.4); s.set_color(sx.MUTED)
         y += row_h
-    sx.export(pg, 'supplementary', 'SupplementaryFig4_imc_high_attention_cells')
-    pd.DataFrame(src).to_csv(sx.ROOT / 'supplementary/SupplementaryFig4_imc_marker_calls_source.csv', index=False)
+    sx.export(pg, 'supplementary', 'SupplementaryFig7_imc_high_attention_cells')
+    pd.DataFrame(src).to_csv(sx.ROOT / 'supplementary/SupplementaryFig7_imc_marker_calls_source.csv', index=False)
 
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-"""Supplementary Fig. 6 - cell embeddings carry diagnostic information within clusters, beyond cluster abundance
+"""Supplementary Fig. 5 - cell embeddings carry diagnostic information within clusters, beyond cluster abundance
 (attribution/atlas/embedding_beyond_composition.py; panel c composition_trained.py)."""
 import json
 import numpy as np
@@ -85,9 +85,9 @@ def build():
         d = r[f'diff_{a_}_minus_{b_}']; lo, hi = d['ci95']; pv = d['p_two_sided']
         pg.text(4.80, yc + .20 + j * .30, lab, fontsize=5.8)
         pg.text(4.92, yc + .33 + j * .30, f"{d['diff']:+.3f} ({lo:.3f} to {hi:.3f}); P = {pv:.2f}".replace('-', '−'), fontsize=5.8)
-    sx.export(pg, 'supplementary', 'SupplementaryFig6_within_cluster_embeddings')
+    sx.export(pg, 'supplementary', 'SupplementaryFig5_within_cluster_embeddings')
     w[['number', 'patients', 'controls', 'abundance_auc', 'within_cluster_embedding_auc', 'permutation_p', 'permutation_q']].sort_values('number').to_csv(
-        sx.ROOT / 'supplementary/SupplementaryFig6_source.csv', index=False)
+        sx.ROOT / 'supplementary/SupplementaryFig5_source.csv', index=False)
 
 
 if __name__ == '__main__':
