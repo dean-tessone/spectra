@@ -128,7 +128,10 @@ def build():
         f.plot([i, i], v['ci95'], color=INK, lw=.7, zorder=3)
         f.text(i, v['ci95'][1] + .008, f"{v['auc']:.2f}", ha='center', va='bottom', fontsize=6)
     f.set_xticks([0, 1]); f.set_xticklabels([v[1] for v in vals], fontsize=5.6, rotation=90, linespacing=1.15)
-    f.set_ylim(.5, .95); f.set_yticks([.5, .6, .7, .8, .9]); f.set_ylabel('Test AUROC'); f.tick_params(axis='x', length=0)
+    f.set_ylim(.5, 1.02); f.set_yticks([.5, .6, .7, .8, .9]); f.set_ylabel('Test AUROC'); f.tick_params(axis='x', length=0)
+    pv = json.load(open(L / 'composition_trained_vs_spectra.json'))['diff_SPECTRA_minus_composition']['p_two_sided']   # paired bootstrap
+    yb = .955; f.plot([0, 0, 1, 1], [yb - .015, yb, yb, yb - .015], color=INK, lw=.6)
+    f.text(.5, yb + .006, f'P = {pv:.2f}', ha='center', va='bottom', fontsize=5.6)
     sx.export(pg, 'figure3', 'Figure3', row_groups=[['b_markers', 'b_abund', 'b_emph']],
               exemptions=[dict(panels=['b_markers', 'b_abund', 'b_emph'], checks=['panel-width', 'horizontal-gutter'], reason='aligned table columns of different content widths')])
     tab.assign(name=names.reindex(tab.index)).to_csv(sx.ROOT / 'figure3/cluster_table_source.csv')
