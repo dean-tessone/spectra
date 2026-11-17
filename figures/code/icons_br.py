@@ -42,19 +42,19 @@ def centrifuge(ax, x, y, w=9, h=7):
         ax.add_patch(Circle((x + w * (.6 + i * .08), y + h * .27), w * .018, fc=['#3E82C9', '#9AA3AA', '#9AA3AA'][i], zorder=2.7))
 
 
-def slide(ax, x, y, w=10, h=2.4, drop=True, angle_skew=.9):
+def slide(ax, x, y, w=10, h=2.4, drop=True, angle_skew=.9, dz=0):
     """Slanted glass slide (perspective) with frosted end and cells plated over the whole clear area."""
     sk = angle_skew
-    ax.add_patch(Polygon([[x, y], [x + w, y], [x + w + sk, y + h], [x + sk, y + h]], closed=True, fc='#C7D3E3', ec=OUT, lw=.6, zorder=2))
-    ax.add_patch(Polygon([[x, y], [x + w * .3, y], [x + w * .3 + sk, y + h], [x + sk, y + h]], closed=True, fc='#9AABC3', ec=OUT, lw=.5, zorder=2.1))
-    ax.add_patch(Polygon([[x, y - .45], [x + w, y - .45], [x + w, y], [x, y]], closed=True, fc='#A9B8CC', ec=OUT, lw=.5, zorder=1.9))
+    ax.add_patch(Polygon([[x, y], [x + w, y], [x + w + sk, y + h], [x + sk, y + h]], closed=True, fc='#C7D3E3', ec=OUT, lw=.6, zorder=2 + dz))
+    ax.add_patch(Polygon([[x, y], [x + w * .3, y], [x + w * .3 + sk, y + h], [x + sk, y + h]], closed=True, fc='#9AABC3', ec=OUT, lw=.5, zorder=2.1 + dz))
+    ax.add_patch(Polygon([[x, y - .45], [x + w, y - .45], [x + w, y], [x, y]], closed=True, fc='#A9B8CC', ec=OUT, lw=.5, zorder=1.9 + dz))
     if drop:   # cells are plated across the whole slide (a monolayer over the clear area), not in a droplet
         P = lambda u, v: [x + u * w + sk * v, y + v * h]
-        ax.add_patch(Polygon([P(.335, .1), P(.975, .1), P(.975, .9), P(.335, .9)], closed=True, fc='#EDB9B6', ec='#C77F82', lw=.4, zorder=2.2))
+        ax.add_patch(Polygon([P(.335, .1), P(.975, .1), P(.975, .9), P(.335, .9)], closed=True, fc='#EDB9B6', ec='#C77F82', lw=.4, zorder=2.2 + dz))
         rng = np.random.default_rng(4)
         for _ in range(150):
             u, v = rng.uniform(.35, .96), rng.uniform(.16, .84)
-            px, py = P(u, v); ax.add_patch(Circle((px, py), .06, fc='#B85C63', ec='none', zorder=2.3))
+            px, py = P(u, v); ax.add_patch(Circle((px, py), .06, fc='#B85C63', ec='none', zorder=2.3 + dz))
     return x + w * .62 + sk / 2, y + h / 2
 
 
@@ -103,15 +103,15 @@ def microscope(ax, x, y, s=1.0):
         ax.add_patch(Circle((x + S(7.3) + i * S(.65), y + S(.65)), S(.17), fc=c, zorder=3))
 
 
-def fwsi_slide(ax, x, y, w=3.0, h=11.0, seed=7, n=90):
-    rb(ax, x, y, w, h, '#F4F6F8', r=.2)
-    rb(ax, x + .25, y + h * .72, w - .5, h * .25, '#E3E7EB', ec='none', r=.15, z=2.1)
-    rb(ax, x + .25, y + .3, w - .5, h * .66, '#0B0D10', ec='none', r=.15, z=2.2)
+def fwsi_slide(ax, x, y, w=3.0, h=11.0, seed=7, n=90, dz=0):
+    rb(ax, x, y, w, h, '#F4F6F8', r=.2, z=2 + dz)
+    rb(ax, x + .25, y + h * .72, w - .5, h * .25, '#E3E7EB', ec='none', r=.15, z=2.1 + dz)
+    rb(ax, x + .25, y + .3, w - .5, h * .66, '#0B0D10', ec='none', r=.15, z=2.2 + dz)
     rng = np.random.default_rng(seed)
     for _ in range(n):
         px, py = x + .45 + rng.uniform() * (w - .9), y + .55 + rng.uniform() * (h * .66 - .5)
         col = rng.choice(['#3DBF62', '#3DBF62', '#3DBF62', '#3E82C9', '#E34B4B'], p=[.3, .3, .26, .09, .05])
-        ax.add_patch(Circle((px, py), .12, fc=col, ec='none', zorder=2.3))
+        ax.add_patch(Circle((px, py), .12, fc=col, ec='none', zorder=2.3 + dz))
 
 
 def network(ax, x, y, w=7, h=10, node='#A6435B', node_out='#C4B9BC', box='#F1F3FA', box_ec='#C9CFE6', edge='#C9CFE6', bar_ec='#8F9BD0'):

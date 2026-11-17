@@ -40,15 +40,17 @@ def build():
     title(15.0, 'Sample Preparation')
     B.arrow(a, 30.5, 11.0, 34.5, 11.0)
     for i_, (c_, nm_) in enumerate([('#3E6FD8', 'DAPI'), ('#C0392B', 'CK'), ('#E0A526', 'Vimentin'), ('#5CB04C', 'CD45'), ('#5CB04C', 'CD31')]):
-        yy = 20.0 - i_ * 3.6
+        yy = 21.0 - i_ * 3.3
         B.antibody(a, 37.0, yy, c_, s=1.05)
         a.text(38.6, yy + .6, nm_, fontsize=6.2, va='center', fontweight='bold')
+    B.slide(a, 35.4, 3.0, w=11.0, h=2.6, dz=-1)    # two slides per patient: one behind the other
     B.slide(a, 34.6, 1.6, w=11.0, h=2.6)
     B.microscope(a, 47.6, 1.6, s=1.08)
     title(46.0, 'Stain & Image')
     B.arrow(a, 58.4, 11.0, 62.0, 11.0)
     # fWSI and (later) the sorted slide are the same object, drawn at the same size
     SW, SH, SY = 6.5, 15.0, 2.8
+    B.fwsi_slide(a, 63.9, SY + .9, w=SW, h=SH, n=190, seed=8, dz=-1)   # the patient's second slide
     B.fwsi_slide(a, 63.0, SY, w=SW, h=SH, n=190)
     title(63.0 + SW / 2, 'fWSI')
     B.arrow(a, 70.6, 11.0, 73.6, 11.0)
@@ -79,7 +81,7 @@ def build():
             ov.text(xx + wseg / 2, by0 + bh / 2, nm_, ha='center', va='center', fontsize=5.6, zorder=7)
         xx += wseg
     ov.add_patch(Rectangle((bx0, by0), bx1 - bx0, bh, fc='none', ec=INK, lw=.6, zorder=7))
-    pg.text(xa - .12, by0 - .035, 'One slide sorted by anomaly score, ≈2.5 million cells', fontsize=5.8, ha='right', va='bottom')
+    pg.text(xa - .12, by0 - .035, 'Each slide sorted by anomaly score, ≈2.5 million cells', fontsize=5.8, ha='right', va='bottom')
     sm0, sm1 = edges[1][0], edges[3][1]             # basophils + eosinophils + monocytes
     ov.plot([sm0, sm0, sm1, sm1], [by0 + bh + .025, by0 + bh + .05, by0 + bh + .05, by0 + bh + .025], color=INK, lw=.5, zorder=7)
     pg.text((sm0 + sm1) / 2, by0 + bh + .07, 'Monocytes, eosinophils, basophils', fontsize=5.4, ha='center', va='top')
