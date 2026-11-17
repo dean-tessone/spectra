@@ -1,4 +1,4 @@
-"""Supplementary Fig. 7 - adaptation methods compared (lung cancer vs lung-nodule work-up; breast cancer vs BRCA carriers).
+"""Supplementary Fig. 6 - adaptation methods compared (lung cancer vs lung-nodule work-up; breast cancer vs BRCA carriers).
 Data: analyses/specific_adaptation_20261111 (auroc_by_part.csv) and analyses/bootstrap_ci_20261111 (test AUROC and paired-gain CIs)."""
 import pandas as pd
 import sx
@@ -7,7 +7,7 @@ from sx import INK, MUTED, RULE, SPECTRA
 AD = sx.REPO / 'analyses/specific_adaptation_20261111'
 CI = sx.REPO / 'analyses/bootstrap_ci_20261111/confidence_intervals.csv'
 ARMS = [('source', 'Pan-cancer model, unchanged', '#9AA5AD'),
-        ('probe', 'Decision layer refitted (Fig. 5)', SPECTRA),
+        ('probe', 'Decision layer refitted (Fig. 6)', SPECTRA),
         ('adapt', 'Last block and decision layer retrained', '#2C7FB8'),
         ('lora', 'LoRA and decision layer retrained', '#8E6BB0')]
 TASKS = [('lung', 'Lung cancer vs\nbenign lung nodules'), ('breast', 'Breast cancer vs\nBRCA carriers without cancer')]
@@ -55,8 +55,8 @@ def build():
         a.set_xlabel('Test AUROC (95% CI)')
         b.set_xlabel('Training CV AUROC')
     pg.text(xb[0], top + h + .36, 'Open circles, the three training folds; line, mean', fontsize=5.6, color=MUTED)
-    sx.export(pg, 'supplementary', 'SupplementaryFig7_adaptation_methods')
-    pd.DataFrame(rows).to_csv(sx.ROOT / 'supplementary/SupplementaryFig7_source.csv', index=False)
+    sx.export(pg, 'supplementary', 'SupplementaryFig6_adaptation_methods')
+    pd.DataFrame(rows).to_csv(sx.ROOT / 'supplementary/SupplementaryFig6_source.csv', index=False)
 
 
 if __name__ == '__main__':
