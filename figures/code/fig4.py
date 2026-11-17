@@ -84,7 +84,7 @@ def build():
 
     # ---------- d: cell removal on the locked model ----------
     R = pd.read_csv(sx.REPO / 'analyses/figure3_locked6_attribution_20261111/removal_summary.csv').set_index('condition')
-    conds = [('CK_gate', 'CK-gated cells'), ('state8', 'CK-bright, CD45-low'), ('CTC_like', 'All CTC-like'), ('top10', 'Top-10 attributed'), ('top50', 'Top-50 attributed')]
+    conds = [('CK_gate', 'CK-gated cells'), ('CTC_like', 'All CTC-like'), ('top10', 'Top-10 attributed'), ('top50', 'Top-50 attributed')]
     pg.letter(.02, Y2 - .30, 'd')
     f2 = pg.ax(1.02, Y2 + .08, 1.30, 2.22, panel='d')
     for i, (c_, nm) in enumerate(conds):
@@ -120,7 +120,8 @@ def build():
             sx.scalebar(ax, 2 * h + 1, sx.UM_PER_PX['40x'], um=5)
     sx.export(pg, 'figure4', 'Figure4', row_groups=[['a', 'b', 'c']],
               exemptions=[dict(panels=['a', 'b', 'c'], checks=['panel-width', 'horizontal-gutter'], reason='different chart types')])
-    R.to_csv(sx.ROOT / 'figure4/cell_removal_summary_source.csv')
+    keep = ['none'] + [k for c_, _ in conds for k in (c_, c_ + '_matched_random')]
+    R.loc[keep].to_csv(sx.ROOT / 'figure4/cell_removal_summary_source.csv')
     d[['label', 'cancer_types', 'score', 'CK_gate', 'CTC_like', 'CTCs']].rename(columns=lambda c: c + '_per_patient' if c in ('CK_gate', 'CTC_like', 'CTCs') else c).to_csv(sx.ROOT / 'figure4/patient_score_vs_burden_deidentified_source.csv', index=False)
 
 
