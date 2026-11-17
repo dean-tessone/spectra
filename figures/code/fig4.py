@@ -19,7 +19,8 @@ CLASSES = ['Large Nuclei', 'imCTCs', 'CTCs', 'pcCTCs', 'CECs', 'Megakaryocytes',
 def build():
     sx.style()
     p = sx.primary_predictions(); m = sx.markers()
-    d = p.merge(m[['donor_id', 'CK_gate_per_slide', 'CTC_like_per_slide'] + [c + '_per_slide' for c in CLASSES]], on='donor_id', validate='one_to_one')
+    # marker counts per patient: summed over the patient's analysed slides (two for 732 of 757 test patients)
+    d = p.merge(m[['donor_id', 'CK_gate', 'CTC_like'] + CLASSES], on='donor_id', validate='one_to_one')
     pg = sx.Page(7.0, 5.62)
     Y1, H1 = .32, 1.62            # top row: quantitative panels
     Y2 = 2.78                     # bottom row: removal and images
@@ -27,8 +28,8 @@ def build():
     # ---------- a: canonical CTC counts versus SPECTRA, identical patients ----------
     pg.letter(.02, .04, 'a')
     a = pg.ax(.50, Y1, H1, H1, panel='a')
-    curves = [('SPECTRA', d.score, SPECTRA, 1.6, '-'), ('CK-gated', d.CK_gate_per_slide, CK, 1.0, '-'),
-              ('CTC-like', d.CTC_like_per_slide, CTC, 1.0, '-'), ('CTCs only', d.CTCs_per_slide, CTC, .9, (0, (2, 1.2)))]
+    curves = [('SPECTRA', d.score, SPECTRA, 1.6, '-'), ('CK-gated', d.CK_gate, CK, 1.0, '-'),
+              ('CTC-like', d.CTC_like, CTC, 1.0, '-'), ('CTCs only', d.CTCs, CTC, .9, (0, (2, 1.2)))]
     hs = []
     for i, (nm, s_, c1, lw, ls) in enumerate(curves):
         f, t, auc = sx.roc(d.label, s_); a.step(f * 100, t * 100, where='post', color=c1, lw=lw, ls=ls, zorder=5 - i)
@@ -41,9 +42,9 @@ def build():
     # ---------- b: SPECTRA score by CK-gated burden ----------
     pg.letter(2.42, .04, 'b')
     c = pg.ax(2.92, Y1, 2.10, H1, panel='b')
-    bins = [(0, 0, '0'), (.5, 1.5, '0.5-1'), (2, 5, '2-5'), (5.5, 1e9, '>5')]
+    bins = [(0, 0, '0'), (1, 2, '1–2'), (3, 10, '3–10'), (11, 1e9, '>10')]
     for i, (lo, hi, lab) in enumerate(bins):
-        sel = d.CK_gate_per_slide.between(lo, hi)
+        sel = d.CK_gate.between(lo, hi)
         for k, (lab_, off, col) in enumerate([(1, -.18, SPECTRA), (0, .18, CONTROL)]):
             v = d.score[sel & d.label.eq(lab_)].to_numpy()
             if len(v) < 2:
@@ -55,7 +56,7 @@ def build():
             c.text(i + off, -9.2, f'{len(v)}', ha='center', va='bottom', fontsize=5.2)
     c.set_xticks(range(len(bins))); c.set_xticklabels([b_[2] for b_ in bins]); c.set_xlim(-.55, len(bins) - .45)
     c.set_ylim(-9.5, 8.5); c.set_yticks([-8, -4, 0, 4, 8]); c.set_ylabel('SPECTRA score (log-odds)')
-    c.set_xlabel('CK-gated cells per slide'); c.tick_params(axis='x', length=0)
+    c.set_xlabel('CK-gated cells per patient'); c.tick_params(axis='x', length=0)
     c.legend(handles=[Patch(fc=SPECTRA, alpha=.8, label='Cancers'), Patch(fc=CONTROL, alpha=.8, label='Controls'), Line2D([], [], color=INK, lw=.9, label='Median')],
              loc='lower left', bbox_to_anchor=(0, 1.0), ncol=3, fontsize=5.6, borderaxespad=0, handlelength=1.2)
 
@@ -63,8 +64,15 @@ def build():
     pg.letter(5.28, .04, 'c')
     e = pg.ax(5.80, Y1, 1.12, H1, panel='c')
     st = pd.read_csv(sx.TEST / 'clinical_stratum_AUROC.csv'); st = st[(st.endpoint == 'primary') & (st.stratification == 'breast_early_late')].set_index('stratum')
-    mk = pd.read_csv(sx.REPO / 'analyses/clinical_cohort_annotations_20261110/markers/breast_stage_CTC_vs_CK_AUROC.csv'); mk = mk[mk.stratification.eq('breast_early_late')].set_index(['stratum', 'marker'])
-    series = [('SPECTRA', SPECTRA, lambda s: st.loc[s, 'AUROC']), ('CK-gated', CK, lambda s: mk.loc[(s, 'CK_gate'), 'AUROC']), ('CTC-like', CTC, lambda s: mk.loc[(s, 'CTC_like'), 'AUROC'])]
+    led = pd.read_csv(sx.REPO / 'analyses/clinical_cohort_annotations_20261110/patient_clinical_ledger.csv', dtype={'donor_id': str})[['donor_id', 'breast_early_late']]
+    bd = d.merge(led, on='donor_id', how='left'); ctl = bd[bd.label.eq(0)]
+    def mk(s, col):   # per-patient marker count, breast cancers of one stage versus the 44 controls
+        cs = bd[bd.label.eq(1) & bd.cancer_types.eq('Breast') & bd.breast_early_late.eq(s)]
+        assert len(cs) == st.loc[s, 'cases']
+        return roc_auc_score(np.r_[np.ones(len(cs)), np.zeros(len(ctl))], np.r_[cs[col], ctl[col]])
+    series = [('SPECTRA', SPECTRA, lambda s: st.loc[s, 'AUROC']), ('CK-gated', CK, lambda s: mk(s, 'CK_gate')), ('CTC-like', CTC, lambda s: mk(s, 'CTC_like'))]
+    pd.DataFrame([dict(stage=s, cases=int(st.loc[s, 'cases']), controls=len(ctl), **{nm: fn(s) for nm, _, fn in series}) for s in ['Early', 'Late']]).to_csv(
+        sx.ROOT / 'figure4/breast_stage_AUROC_source.csv', index=False)
     for i, s in enumerate(['Early', 'Late']):
         for j, (nm, c1, fn) in enumerate(series):
             e.bar(i + (j - 1) * .26, fn(s) - .5, bottom=.5, width=.24, color=c1)
@@ -113,7 +121,7 @@ def build():
     sx.export(pg, 'figure4', 'Figure4', row_groups=[['a', 'b', 'c']],
               exemptions=[dict(panels=['a', 'b', 'c'], checks=['panel-width', 'horizontal-gutter'], reason='different chart types')])
     R.to_csv(sx.ROOT / 'figure4/cell_removal_summary_source.csv')
-    d[['label', 'cancer_types', 'score', 'CK_gate_per_slide', 'CTC_like_per_slide', 'CTCs_per_slide']].to_csv(sx.ROOT / 'figure4/patient_score_vs_burden_deidentified_source.csv', index=False)
+    d[['label', 'cancer_types', 'score', 'CK_gate', 'CTC_like', 'CTCs']].rename(columns=lambda c: c + '_per_patient' if c in ('CK_gate', 'CTC_like', 'CTCs') else c).to_csv(sx.ROOT / 'figure4/patient_score_vs_burden_deidentified_source.csv', index=False)
 
 
 if __name__ == '__main__':

@@ -69,11 +69,11 @@ for tgt, col in [(.9, 'called90'), (.95, 'called95')]:
 
 # --- markers (paired)
 m = sx.markers()
-d = p.merge(m[['donor_id', 'CK_gate_per_slide', 'CTC_like_per_slide', 'CTCs_per_slide']], on='donor_id', validate='one_to_one')
+d = p.merge(m[['donor_id', 'CK_gate', 'CTC_like', 'CTCs']], on='donor_id', validate='one_to_one')   # counts per patient (summed over the patient's analysed slides)
 dp, dn = d[d.label == 1], d[d.label == 0]
 I1 = boot_idx(len(dp)); I0 = boot_idx(len(dn))
 base = np.array([auc_fast(dp.score.to_numpy()[I1[b]], dn.score.to_numpy()[I0[b]]) for b in range(B)])
-for col, nm in [('CK_gate_per_slide', 'CK-gated burden'), ('CTC_like_per_slide', 'CTC-like burden'), ('CTCs_per_slide', 'CTCs-only burden')]:
+for col, nm in [('CK_gate', 'CK-gated burden'), ('CTC_like', 'CTC-like burden'), ('CTCs', 'CTCs-only burden')]:
     a, b_ = dp[col].to_numpy(), dn[col].to_numpy()
     r = np.array([auc_fast(a[I1[b]], b_[I0[b]]) for b in range(B)])
     add(f'AUROC {nm}', auc_fast(a, b_), r, cases=len(a), controls=len(b_))
