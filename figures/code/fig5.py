@@ -16,7 +16,7 @@ L = sx.REPO / 'analyses/figure3_locked6_attribution_20261111/leiden'
 C40 = sx.REPO / 'analyses/figure3_locked6_attribution_20261111/cache_40x'
 PAL = ['#4E79A7', '#F28E2B', '#E15759', '#76B7B2', '#59A14F', '#EDC948', '#B07AA1', '#FF9DA7', '#9C755F', '#BAB0AC',
        '#2F4B7C', '#A05195', '#D45087', '#F95D6A', '#FF7C43', '#665191', '#8CD17D', '#B6992D', '#499894', '#86BCB6', '#B5BD61', '#79706E', '#17BECF']
-ARMS = [('source', 'Pan-cancer model, unchanged', '#9AA5AD'), ('probe', 'Adapted: decision layer refitted', SPECTRA)]   # other methods: Supplementary Fig. 8
+ARMS = [('source', 'Pan-cancer model, unchanged', '#9AA5AD'), ('probe', 'Adapted: decision layer refitted', SPECTRA)]   # other methods: Supplementary Fig. 7
 TASKS = [('lung', 'Lung cancer vs\nbenign lung nodules', None), ('breast', 'Breast cancer vs\nBRCA carriers without cancer', None)]
 
 

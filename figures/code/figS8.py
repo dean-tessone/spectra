@@ -1,4 +1,4 @@
-"""Supplementary Fig. 8 - adaptation methods compared (lung cancer vs lung-nodule work-up; breast cancer vs BRCA carriers).
+"""Supplementary Fig. 7 - adaptation methods compared (lung cancer vs lung-nodule work-up; breast cancer vs BRCA carriers).
 Data: analyses/specific_adaptation_20261111 (auroc_by_part.csv) and analyses/bootstrap_ci_20261111 (test AUROC and paired-gain CIs)."""
 import pandas as pd
 import sx
@@ -55,8 +55,8 @@ def build():
         a.set_xlabel('Test AUROC (95% CI)')
         b.set_xlabel('Training CV AUROC')
     pg.text(xb[0], top + h + .36, 'Open circles, the three training folds; line, mean', fontsize=5.6, color=MUTED)
-    sx.export(pg, 'supplementary', 'SupplementaryFig8_adaptation_methods')
-    pd.DataFrame(rows).to_csv(sx.ROOT / 'supplementary/SupplementaryFig8_source.csv', index=False)
+    sx.export(pg, 'supplementary', 'SupplementaryFig7_adaptation_methods')
+    pd.DataFrame(rows).to_csv(sx.ROOT / 'supplementary/SupplementaryFig7_source.csv', index=False)
 
 
 if __name__ == '__main__':
