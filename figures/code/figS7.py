@@ -1,5 +1,6 @@
 """Supplementary Fig. 6 - cell embeddings carry diagnostic information within clusters, beyond cluster abundance
-(attribution/atlas/embedding_beyond_composition.py)."""
+(attribution/atlas/embedding_beyond_composition.py; panel c composition_trained.py)."""
+import json
 import numpy as np
 import pandas as pd
 from matplotlib.lines import Line2D
@@ -14,7 +15,7 @@ def build():
     names = pd.read_csv(L / 'cluster_names.csv', index_col=0).name
     w = w.sort_values('within_cluster_embedding_auc', ascending=False).reset_index(drop=True)
     K = len(w)
-    pg = sx.Page(7.0, 3.55)
+    pg = sx.Page(7.0, 4.90)
 
     # ---------- a: abundance versus within-cluster embedding AUROC, every cluster ----------
     pg.letter(.02, .04, 'a')
@@ -58,6 +59,32 @@ def build():
         ax_.set_xticks([.3, .5, .7]); ax_.set_yticks([.3, .5, .7]); ax_.set_xticklabels(['0.3', '0.5', '0.7']); ax_.set_yticklabels(['0.3', '0.5', '0.7'])
     b.set_xlabel('Cluster abundance AUROC'); b.set_ylabel('Within-cluster embedding AUROC')
     b.text(.31, .79, 'Embedding better\nthan abundance', ha='left', va='top', fontsize=5.6, color=MUTED, linespacing=1.1)
+
+    # ---------- c: overall test AUROC, composition model trained like SPECTRA ----------
+    r = json.load(open(L / 'composition_trained_vs_spectra.json'))
+    rows = [('composition', 'Cluster composition', MUTED, 'white'),
+            ('composition_plus_mean_embedding', 'Composition + mean cell embedding', SPECTRA, SPECTRA_L),
+            ('SPECTRA', 'SPECTRA', SPECTRA, SPECTRA)]
+    pg.letter(.02, 3.58, 'c')
+    yc, hc = 3.72, .80
+    cn = pg.ax(.10, yc, 1.95, hc); cn.set_xlim(0, 1); cn.set_ylim(len(rows) - .5, -.5); cn.axis('off')
+    c = pg.ax(2.10, yc, 2.15, hc)
+    for i, (k, lab, ec, fc) in enumerate(rows):
+        v = r['test_auc'][k]; lo, hi = v['ci95']
+        cn.text(.98, i, lab, fontsize=5.8, va='center', ha='right')
+        c.plot([lo, hi], [i, i], color=ec, lw=1.0, solid_capstyle='butt', zorder=1)
+        c.scatter([v['auc']], [i], s=20, facecolor=fc, edgecolor=ec, lw=.9, zorder=2)
+        c.text(hi + .01, i, f"{v['auc']:.2f}", fontsize=5.8, va='center', ha='left')
+    c.set_ylim(len(rows) - .5, -.5); c.set_yticks([]); c.spines['left'].set_visible(False)
+    c.set_xlim(.6, 1.0); c.set_xticks([.6, .7, .8, .9, 1.0]); c.set_xticklabels(['0.6', '0.7', '0.8', '0.9', '1.0'])
+    c.set_xlabel('Test AUROC (95% CI), trained on the training cohort')
+    pg.text(4.80, yc - .02, 'Paired difference in test AUROC (95% CI)', fontsize=5.8, fontweight='bold')
+    for j, (a_, b_, lab) in enumerate([('SPECTRA', 'composition', 'SPECTRA − composition'),
+                                       ('SPECTRA', 'composition_plus_mean_embedding', 'SPECTRA − composition + embedding'),
+                                       ('composition_plus_mean_embedding', 'composition', 'Composition + embedding − composition')]):
+        d = r[f'diff_{a_}_minus_{b_}']; lo, hi = d['ci95']; pv = d['p_two_sided']
+        pg.text(4.80, yc + .20 + j * .30, lab, fontsize=5.8)
+        pg.text(4.92, yc + .33 + j * .30, f"{d['diff']:+.3f} ({lo:.3f} to {hi:.3f}); P = {pv:.2f}".replace('-', '−'), fontsize=5.8)
     sx.export(pg, 'supplementary', 'SupplementaryFig6_within_cluster_embeddings')
     w[['number', 'patients', 'controls', 'abundance_auc', 'within_cluster_embedding_auc', 'permutation_p', 'permutation_q']].sort_values('number').to_csv(
         sx.ROOT / 'supplementary/SupplementaryFig6_source.csv', index=False)
