@@ -77,7 +77,6 @@ def build():
     a.add_patch(Rectangle((x0, yl), .1, .1, color=SPECTRA, lw=0)); a.text(x0 + .14, yl + .05, 'Positive', fontsize=5.6, va='center')
     a.add_patch(Rectangle((x0 + .8, yl), .1, .1, color=FAINT, lw=0)); a.text(x0 + .94, yl + .05, 'Negative (blank, not in panel)', fontsize=5.6, va='center')
     a.add_patch(Rectangle((x0 + 2.9, yl), .1, .1, color=CONTROL, lw=0)); a.text(x0 + 3.04, yl + .05, 'Cell from a non-cancer control', fontsize=5.6, va='center')
-    a.text(x0 + 4.75, yl + .05, 'Cluster 20: no IMC cells', fontsize=5.6, va='center', color=MUTED)
 
     # ---------- b: copy-number heatmap, one row per sequenced cell ----------
     pg.letter(.02, 2.62, 'b')
