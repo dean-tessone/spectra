@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+runs/
+analyses/
+data/
+raw/
+release/
+shared_outputs/
+cohort/**/*.csv
+cohort/**/*.json
+cohort/**/*.md
+!cohort/README.md
