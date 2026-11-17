@@ -157,7 +157,9 @@ def primary_predictions():
     assert len(pred) == 757 and pred.label.eq(1).sum() == 713
     ops = operating_points()
     pred['score'] = np.log(pred.probability.clip(1e-9, 1 - 1e-9) / (1 - pred.probability.clip(1e-9, 1 - 1e-9)))
-    pred['called90'] = pred.probability > ops[.9]; pred['called95'] = pred.probability > ops[.95]
+    # official rule of the sealed test report: called when probability >= the ROC-derived cut-off (each cut-off equals one case's
+    # score; 1e-12 absorbs the CSV round-trip of that score). Gives 403/713 at 90% and 283/713 at 95% specificity.
+    pred['called90'] = pred.probability >= ops[.9] - 1e-12; pred['called95'] = pred.probability >= ops[.95] - 1e-12
     return pred
 
 
