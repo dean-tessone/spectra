@@ -41,7 +41,7 @@ def build():
     b.legend(handles=hs, loc='center left', bbox_to_anchor=(1.04, .5), fontsize=6, handlelength=1.3, labelspacing=.6, borderaxespad=0, title='AUROC', title_fontsize=6)
 
     # c: every patient
-    draw_strip(pg, 1.10, 2.95, 5.75, 2.65, letter_xy=(.02, 2.55), table=False, letter='c', legend_xy='top')
+    draw_strip(pg, 1.55, 2.95, 5.30, 2.65, letter_xy=(.02, 2.55), table=False, letter='c', legend_xy='top', show_n=True)
     sx.export(pg, 'figure2', 'Figure2', row_groups=[['a', 'b']])
     p[['label', 'cancer_types', 'score', 'called90', 'called95']].sort_values(['cancer_types', 'score']).to_csv(sx.ROOT / 'figure2/patient_scores_deidentified_source.csv', index=False)
 
