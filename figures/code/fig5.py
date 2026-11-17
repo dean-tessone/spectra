@@ -16,8 +16,7 @@ L = sx.REPO / 'analyses/figure3_locked6_attribution_20261111/leiden'
 C40 = sx.REPO / 'analyses/figure3_locked6_attribution_20261111/cache_40x'
 PAL = ['#4E79A7', '#F28E2B', '#E15759', '#76B7B2', '#59A14F', '#EDC948', '#B07AA1', '#FF9DA7', '#9C755F', '#BAB0AC',
        '#2F4B7C', '#A05195', '#D45087', '#F95D6A', '#FF7C43', '#665191', '#8CD17D', '#B6992D', '#499894', '#86BCB6', '#B5BD61', '#79706E', '#17BECF']
-ARMS = [('source', 'Pan-cancer model, unchanged', '#9AA5AD'), ('probe', 'Decision layer refitted, model frozen', '#2C7FB8'),
-        ('adapt', 'Last block and decision layer retrained', SPECTRA)]
+ARMS = [('source', 'Pan-cancer model, unchanged', '#9AA5AD'), ('probe', 'Adapted: decision layer refitted', SPECTRA)]   # other methods: Supplementary Fig. 7
 TASKS = [('lung', 'Lung cancer vs\nbenign lung nodules', None), ('breast', 'Breast cancer vs\nBRCA carriers without cancer', None)]
 
 
@@ -36,15 +35,15 @@ def build():
     # ---------- a: AUROC gain ----------
     pg.letter(.02, .04, 'a')
     a = pg.ax(.50, .40, 2.55, 1.55, panel='a')
-    w = .24
+    w = .30
     for ti, (task, tname, _) in enumerate(TASKS):
         base = test.loc[(task, 'source')].auroc
         for ai, (arm, an, c1) in enumerate(ARMS):
             v = test.loc[(task, arm)].auroc
-            a.bar(ti + (ai - 1) * w, v - .4, bottom=.4, width=w * .92, color=c1)
-            a.text(ti + (ai - 1) * w, v + .01, f'{v:.2f}', ha='center', va='bottom', fontsize=5.4)
-        best = max(test.loc[(task, arm)].auroc for arm, _, _ in ARMS[1:])
-        a.text(ti, best + .07, f'+{best - base:.2f}', ha='center', va='bottom', fontsize=7, fontweight='bold')
+            a.bar(ti + (ai - .5) * w, v - .4, bottom=.4, width=w * .92, color=c1)
+            a.text(ti + (ai - .5) * w, v + .01, f'{v:.2f}', ha='center', va='bottom', fontsize=5.6)
+        new = test.loc[(task, 'probe')].auroc
+        a.text(ti, new + .07, f'+{new - base:.2f}', ha='center', va='bottom', fontsize=7, fontweight='bold')
     a.set_xticks([0, 1]); a.set_xticklabels([t[1] for t in TASKS], linespacing=1.2); a.tick_params(axis='x', length=0)
     a.set_ylim(.4, 1.05); a.set_yticks([.4, .6, .8, 1.0]); a.set_ylabel('Test AUROC')
     a.legend(handles=[Patch(fc=c1, label=an) for _, an, c1 in ARMS], loc='lower left', bbox_to_anchor=(0, 1.02), ncol=1, fontsize=5.6,

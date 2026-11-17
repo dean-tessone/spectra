@@ -94,11 +94,11 @@ for task in ['lung', 'breast']:
     wp, wn = w[w.label == 1], w[w.label == 0]
     J1 = rng.integers(0, len(wp), (B, len(wp))); J0 = rng.integers(0, len(wn), (B, len(wn)))
     reps = {}
-    for arm in ['source', 'probe', 'adapt']:
+    for arm in ['source', 'probe', 'adapt', 'lora']:
         a, b_ = wp[arm].to_numpy(), wn[arm].to_numpy()
         reps[arm] = np.array([auc_fast(a[J1[b]], b_[J0[b]]) for b in range(B)])
         add(f'Adaptation {task} AUROC {arm}', auc_fast(a, b_), reps[arm], cases=len(a), controls=len(b_))
-    for arm in ['probe', 'adapt']:
+    for arm in ['probe', 'adapt', 'lora']:
         add(f'Adaptation {task} AUROC gain {arm} minus source (paired)', auc_fast(wp[arm].to_numpy(), wn[arm].to_numpy()) - auc_fast(wp.source.to_numpy(), wn.source.to_numpy()),
             reps[arm] - reps['source'], kind='AUROC difference')
 
