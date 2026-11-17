@@ -6,13 +6,12 @@ of slide_id) only; no clinical information beyond cancer type.
     python export.py run [workers]     # write shards (resumable: finished shards with a receipt are skipped)
     python export.py validate          # re-read every shard and check the release against its sources
 """
-import os
 from pathlib import Path
-import hashlib, importlib.util, json, sys, time
+import hashlib, importlib.util, json, os, sys, time
 import numpy as np, pandas as pd
 
 REPO = Path(__file__).resolve().parents[2]
-OUT = Path(os.environ.get('SPECTRA_RELEASE_DIR', 'release'))
+OUT = Path(os.environ.get('SPECTRA_RELEASE_DIR', Path.home() / 'Documents/SPECTRA_zenodo_20261116'))   # local disk
 INV = REPO / 'runs/paper_regeneration_20261109_v1a/cohort/local_cache_inventory.csv'
 POP = REPO / 'cohort/reference_policy/all_population_slides.csv'
 BLUE = REPO / 'runs/bluev2_ctc_comparison_20261110_v1b'
