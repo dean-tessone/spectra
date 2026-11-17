@@ -43,7 +43,7 @@ def build():
     atlas['umap_1'], atlas['umap_2'] = xy[:, 0], xy[:, 1]
     tab = pd.read_csv(L / 'cluster_table.csv', index_col=0)
     names = pd.read_csv(L / 'cluster_names.csv', index_col=0).name
-    comp = json.load(open(L / 'composition_reference.json'))
+    comp = json.load(open(L / 'composition_trained_vs_spectra.json'))['test_auc']   # composition model trained on the training cohort (Supplementary Fig. 5c)
     col = {k: PAL[k % len(PAL)] for k in tab.index}
     NUM = sx.cluster_numbers()
     im = crops()
@@ -122,12 +122,13 @@ def build():
     # ---------- c: composition alone ----------
     pg.letter(6.05, 3.40, 'c')
     f = pg.ax(6.42, y0, .52, h * .6, panel='c')
-    vals = [(comp['spectra_auc'], 'SPECTRA', SPECTRA), (comp['composition_auc_mean'], 'Cluster\ncomposition', '#5F6B72')]
+    vals = [(comp['SPECTRA'], 'SPECTRA', SPECTRA), (comp['composition'], 'Cluster\ncomposition', '#5F6B72')]
     for i, (v, lab, c1) in enumerate(vals):
-        f.bar(i, v - .5, bottom=.5, color=c1, width=.7)
-        f.text(i, v + .008, f'{v:.2f}', ha='center', va='bottom', fontsize=6)
+        f.bar(i, v['auc'] - .5, bottom=.5, color=c1, width=.7)
+        f.plot([i, i], v['ci95'], color=INK, lw=.7, zorder=3)
+        f.text(i, v['ci95'][1] + .008, f"{v['auc']:.2f}", ha='center', va='bottom', fontsize=6)
     f.set_xticks([0, 1]); f.set_xticklabels([v[1] for v in vals], fontsize=5.6, rotation=90, linespacing=1.15)
-    f.set_ylim(.5, .9); f.set_yticks([.5, .6, .7, .8, .9]); f.set_ylabel('AUROC'); f.tick_params(axis='x', length=0)
+    f.set_ylim(.5, .95); f.set_yticks([.5, .6, .7, .8, .9]); f.set_ylabel('Test AUROC'); f.tick_params(axis='x', length=0)
     sx.export(pg, 'figure3', 'Figure3', row_groups=[['b_markers', 'b_abund', 'b_emph']],
               exemptions=[dict(panels=['b_markers', 'b_abund', 'b_emph'], checks=['panel-width', 'horizontal-gutter'], reason='aligned table columns of different content widths')])
     tab.assign(name=names.reindex(tab.index)).to_csv(sx.ROOT / 'figure3/cluster_table_source.csv')
