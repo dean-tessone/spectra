@@ -136,7 +136,6 @@ def build():
     m.add_patch(Circle((gx, gy), .32, fc=INK, ec='none', zorder=5))
     m.text(gx - ro + wi / 2, gy - .35, '0', ha='center', va='top', fontsize=5.2); m.text(gx + ro - wi / 2, gy - .35, '1', ha='center', va='top', fontsize=5.2)
     m.text(gx, gy + ro + .55, 'SPECTRA\nscore', ha='center', va='bottom', fontsize=6.2, fontweight='bold', linespacing=1.1)
-    m.text(gx, gy - 1.6, 'P(cancer)', ha='center', va='top', fontsize=5.6)
     # attribution back to each cell
     m.plot([gx, gx, TX + TW_ / 2], [gy - 3.3, -.6, -.6], color=SPECTRA_D, lw=.9, ls=(0, (3, 2)), zorder=3)
     I.arrow(m, TX + TW_ / 2, -.6, TX + TW_ / 2, 1.2, color=SPECTRA_D, lw=.9, ms=7)
