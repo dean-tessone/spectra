@@ -134,7 +134,7 @@ def build():
     ang = np.deg2rad(180 * (1 - .9))
     m.plot([gx, gx + (ro - .25) * np.cos(ang)], [gy, gy + (ro - .25) * np.sin(ang)], color=INK, lw=1.3, solid_capstyle='round', zorder=4)
     m.add_patch(Circle((gx, gy), .32, fc=INK, ec='none', zorder=5))
-    m.text(gx - ro + wi / 2, gy - .35, '0', ha='center', va='top', fontsize=5.2); m.text(gx + ro - wi / 2, gy - .35, '1', ha='center', va='top', fontsize=5.2)
+    m.text(gx - ro + wi / 2, gy - .35, 'Non-cancer', ha='center', va='top', fontsize=5.2); m.text(gx + ro - wi / 2, gy - .35, 'Cancer', ha='center', va='top', fontsize=5.2)
     m.text(gx, gy + ro + .55, 'SPECTRA\nscore', ha='center', va='bottom', fontsize=6.2, fontweight='bold', linespacing=1.1)
     # attribution back to each cell
     m.plot([gx, gx, TX + TW_ / 2], [gy - 3.3, -.6, -.6], color=SPECTRA_D, lw=.9, ls=(0, (3, 2)), zorder=3)
