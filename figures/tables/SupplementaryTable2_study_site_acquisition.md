@@ -1,0 +1,53 @@
+**Supplementary Table 2 | Studies, collection sites and acquisition.** Patients per study in the training and held-out test partitions. Reference controls form the primary comparison; reserved controls (lung-nodule work-up, BRCA-variant carriers) were used only for the adaptation analyses (Fig. 6). Collection site from laboratory records; multi-site trials are listed as trial sites; JN-family patients were collected through USC and Billings Clinic without a per-patient record. Scan years and scanners from slide acquisition metadata. Tube, blood collection tube type (EPIC controls: type not recorded, retained by a predefined exception). Role: Cancer, cancer patients; Reference, reference controls; Reserved, reserved controls. NR, not recorded.
+
+| Study | Role | Collection site | Cancer type | Cancers (train / test) | Controls (train / test) | Scan years | Scanners | Tube |
+|---|---|---|---|---|---|---|---|---|
+| 0S-16-8 | Cancer | USC | Head and neck, lung | 25 / 11 | 0 / 0 | 2019–2024 | BZ3, BZ4, BZ5 | Streck |
+| 2N-19-3 | Cancer | USC | Lung | 1 / 0 | 0 / 0 | 2021 | BZ3 | Streck |
+| ATEZ | Cancer | USC | Lung | 2 / 2 | 0 / 0 | 2024 | BZ3, BZ5 | Streck |
+| ATEZ-R | Cancer | USC | Lung | 1 / 0 | 0 / 0 | 2024 | BZ5 | Streck |
+| BC-OPT | Cancer | Billings Clinic | Breast | 103 / 50 | 0 / 0 | 2019–2023 | BZ3, BZ4, BZ5 | Streck |
+| BP007 | Cancer | Anne Arundel, Walter Reed | Breast | 35 / 18 | 0 / 0 | 2019–2025 | BZ3, BZ4, BZ5 | Streck |
+| CART-O | Cancer | City of Hope | Ovarian | 7 / 3 | 0 / 0 | 2023–2025 | BZ3, BZ5 | Streck |
+| CART-P | Cancer | City of Hope | Prostate | 7 / 8 | 0 / 0 | 2019–2025 | BZ3, BZ4, BZ5 | Streck |
+| CART-UP | Cancer | UPenn | Prostate | 5 / 1 | 0 / 0 | 2024–2025 | BZ3, BZ5 | Streck |
+| CH-OPT | Cancer | City of Hope | Breast | 4 / 3 | 0 / 0 | 2020–2023 | BZ3, BZ4, BZ5 | Streck |
+| CHLA-OS | Cancer | CHLA | Bone | 15 / 7 | 0 / 0 | 2019–2024 | BZ3, BZ4, BZ5 | Streck |
+| D-OPT | Cancer | Duke | Breast | 24 / 12 | 0 / 0 | NR | NR | NR |
+| ENZA1 | Cancer | University of Colorado | Breast | 18 / 7 | 0 / 0 | 2019–2020 | BZ3, BZ4, BZ5 | Streck |
+| GS | Cancer | Gilead sites | Colon | 7 / 3 | 0 / 0 | 2019 | BZ3, BZ4, BZ5 | Streck |
+| INTC17 | Cancer | Cedars-Sinai | Breast | 17 / 4 | 0 / 0 | 2024–2025 | BZ3, BZ5 | Streck |
+| JHHBa | Cancer | Johns Hopkins | Bladder, Prostate | 17 / 11 | 0 / 0 | 2019–2020 | BZ3, BZ4, BZ5 | Streck |
+| JN | Cancer | USC | Lung | 6 / 2 | 0 / 0 | 2020–2021 | BZ4, BZ5 | Streck |
+| KETA | Cancer | MSKCC | Lung | 18 / 5 | 0 / 0 | 2024 | BZ3, BZ5 | Streck |
+| LMD | Cancer | City of Hope | Leptomeningeal disease | 1 / 2 | 0 / 0 | 2022–2023 | BZ3, BZ5 | Streck |
+| M-OPT-P | Cancer | MD Anderson | Breast | 3 / 0 | 0 / 0 | 2023 | BZ5 | Streck |
+| MCCT-039 | Cancer | UCSD | Bladder | 8 / 2 | 0 / 0 | 2019 | BZ3, BZ4, BZ5 | Streck |
+| MDA-AVPC | Cancer | MD Anderson | Prostate | 42 / 15 | 0 / 0 | 2020–2022 | BZ3, BZ4, BZ5 | Streck |
+| MDAnd | Cancer | MD Anderson | Prostate | 516 / 213 | 0 / 0 | 2019–2023 | BZ3, BZ4, BZ5 | Streck |
+| MM02 | Cancer | MD Anderson | Multiple Myeloma | 48 / 23 | 0 / 0 | 2019–2022 | BZ3, BZ4, BZ5 | Streck |
+| MSM-GHS | Cancer | Morehouse/Grady | Prostate | 22 / 15 | 0 / 0 | 2025 | BZ3, BZ5 | Streck |
+| MSM-UAB | Cancer | UAB | Prostate | 2 / 2 | 0 / 0 | 2025 | BZ3, BZ5 | Streck |
+| NRG-BR002 | Cancer | NRG-BR002 sites | Breast | 49 / 15 | 0 / 0 | 2019–2026 | BZ3, BZ4, BZ5, BZ6 | Streck |
+| PANC | Cancer | Cedars-Sinai | Pancreatic | 12 / 7 | 0 / 0 | 2021–2022 | BZ3, BZ4, BZ5 | Streck |
+| PANC-M | Cancer | Mayo Clinic | Pancreatic | 2 / 1 | 0 / 0 | 2024 | BZ3, BZ5 | Streck |
+| PANCEUS | Cancer | Cedars-Sinai | Pancreatic | 31 / 11 | 0 / 0 | 2022–2025 | BZ3, BZ5 | Streck |
+| PDMS_P | Cancer | USC | Bladder | 1 / 2 | 0 / 0 | 2019 | BZ3, BZ4 | Streck |
+| S1222 | Cancer | NR | Breast | 24 / 9 | 0 / 0 | NR | NR | NR |
+| S1416 | Cancer | SWOG S1416 sites | Breast | 226 / 79 | 0 / 0 | 2019–2025 | BZ3, BZ4, BZ5 | Streck |
+| TLP | Cancer | University of Colorado | Breast | 23 / 20 | 0 / 0 | 2019–2023 | BZ3, BZ4, BZ5 | Streck |
+| U-OPT | Cancer | USC | Breast | 1 / 0 | 0 / 0 | 2020 | BZ4 | Streck |
+| U-OPT-P | Cancer | USC | Breast | 4 / 1 | 0 / 0 | 2023 | BZ3, BZ5 | Streck |
+| UM | Cancer | Manchester | Lung | 8 / 6 | 0 / 0 | 2019 | BZ3, BZ4, BZ5 | Streck |
+| USC-BCa | Cancer | USC | Bladder | 106 / 41 | 0 / 0 | 2020–2026 | BZ3, BZ4, BZ5 | Streck |
+| USC-UM | Cancer | USC | Uveal Melanoma | 29 / 12 | 0 / 0 | 2022–2026 | BZ3, BZ5, BZ6 | Streck |
+| USC-UTUC | Cancer | USC | UTUC | 100 / 44 | 0 / 0 | 2021–2026 | BZ3, BZ4, BZ5, BZ6 | Streck |
+| VA | Cancer | UCLA | Prostate | 13 / 6 | 0 / 0 | 2019–2020 | BZ3, BZ4, BZ5 | Streck |
+| JN2 | Cancer + reserved | USC | Lung | 7 / 1 | 26 / 9 | 2020–2022 | BZ3, BZ4, BZ5, BZ6 | Streck |
+| JN2-R | Cancer + reserved | USC | Lung | 3 / 2 | 0 / 2 | 2022–2023 | BZ3, BZ5 | Streck |
+| SU | Cancer + reserved | Stanford | Lung | 96 / 37 | 32 / 12 | NR | NR | NR |
+| EPIC | Reference | Epic Sciences | – | 0 / 0 | 35 / 16 | 2020–2021 | BZ4, BZ5 | Unknown |
+| INTC17-C | Reference | Cedars-Sinai | – | 0 / 0 | 15 / 6 | 2024–2025 | BZ3, BZ5 | Streck |
+| NBD | Reference | Scripps | – | 0 / 0 | 39 / 16 | 2019–2026 | BZ3, BZ4, BZ5, BZ6 | Streck |
+| PANC-Ctrl | Reference | Cedars-Sinai | – | 0 / 0 | 15 / 6 | 2024–2025 | BZ3, BZ5 | Streck |
+| INTC09 | Reserved | UChicago | – | 0 / 0 | 14 / 8 | 2024–2025 | BZ3, BZ5 | Streck |

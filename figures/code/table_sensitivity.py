@@ -39,7 +39,7 @@ def build():
           '|---|---|---|---|---|']
     md += [f'| {r.cancer_type} | {r.n} | {auc(r)} | {pct(r, 90)} | {pct(r, 95)} |' for _, r in t.iterrows()]
     k = p[p.label.eq(0)]
-    md += ['', f'Each cancer type versus the same 44 non-cancer controls. AUROC 95% CIs from a stratified patient bootstrap (4,000 replicates); '
+    md += ['', f'Each cancer type versus the same 44 non-cancer controls; AUROCs for different cancer types share these controls and are therefore correlated. AUROC 95% CIs from a stratified patient bootstrap (4,000 replicates); '
                f'not given for types with fewer than 10 patients, which are descriptive. Sensitivity at the common cut-offs set on the pooled ROC '
                f'at 90% and 95% specificity (achieved {int((~k.called90).sum())}/44 and {int((~k.called95).sum())}/44), with Wilson 95% intervals.']
     (out / 'SupplementaryTable1_performance_by_cancer_type.md').write_text('\n'.join(md) + '\n')

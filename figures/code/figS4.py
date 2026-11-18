@@ -1,4 +1,4 @@
-"""Supplementary Fig. 3 - attribution sanity checks: cascading model randomization and seed stability."""
+"""Supplementary Fig. 4 - attribution sanity checks: cascading model randomization and seed stability."""
 import json
 import numpy as np
 import pandas as pd
@@ -62,11 +62,11 @@ def build():
     c.set_xscale('log'); c.set_xlim(1, 2000); c.set_ylim(0, 100); c.set_xticks([1, 10, 100, 1000]); c.set_xticklabels(['1', '10', '100', '1,000'])
     c.set_yticks([0, 50, 75, 90, 100]); c.set_xlabel("Cells, ranked by attribution (median {:,.0f} per patient)".format(need.cells.median()))
     c.set_ylabel('Positive evidence\ncaptured (%)', linespacing=1.2); c.legend(loc='lower right', fontsize=5.6, handlelength=1.4, borderaxespad=.2)
-    pd.DataFrame(rows).to_csv(sx.ROOT / 'supplementary/SupplementaryFig3_evidence_concentration_source.csv', index=False)
+    pd.DataFrame(rows).to_csv(sx.ROOT / 'supplementary/SupplementaryFig4_evidence_concentration_source.csv', index=False)
 
-    sx.export(pg, 'supplementary', 'SupplementaryFig3_attribution_sanity', row_groups=[['a', 'b']], column_groups=[['a', 'c']],
+    sx.export(pg, 'supplementary', 'SupplementaryFig4_attribution_sanity', row_groups=[['a', 'b']], column_groups=[['a', 'c']],
               exemptions=[dict(panels=['a', 'b', 'c'], checks=['panel-width', 'horizontal-gutter', 'column', 'vertical-gutter'], reason='line plots and square scatter')])
-    s.to_csv(sx.ROOT / 'supplementary/SupplementaryFig3_randomization_source.csv'); e.to_csv(sx.ROOT / 'supplementary/SupplementaryFig3_emphasis_by_seed_source.csv')
+    s.to_csv(sx.ROOT / 'supplementary/SupplementaryFig4_randomization_source.csv'); e.to_csv(sx.ROOT / 'supplementary/SupplementaryFig4_emphasis_by_seed_source.csv')
 
 
 if __name__ == '__main__':

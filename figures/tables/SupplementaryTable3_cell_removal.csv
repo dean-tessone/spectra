@@ -1,0 +1,10 @@
+Cells removed,Median per cancer patient,AUROC (95% CI),"AUROC, matched random removal",Difference vs random (95% CI),Sensitivity at original 90% cut-off (controls below),Sensitivity at re-estimated 90% cut-off
+None (intact model),–,0.82 (0.75–0.89),–,–,56.5% (40/44),56.5%
+CK-gated cells,2,0.82 (0.75–0.88),0.83,-0.002 (-0.009 to +0.004),56.2% (40/44),56.4%
+All CTC-like cells,618,0.73 (0.65–0.80),0.80,-0.067 (-0.157 to +0.025),59.3% (36/44),32.1%
+Top-10 attributed cells,10,0.84 (0.78–0.89),0.82,+0.013 (-0.023 to +0.053),28.9% (43/44),51.6%
+Top-50 attributed cells,50,0.82 (0.76–0.88),0.83,-0.004 (-0.065 to +0.069),14.9% (44/44),60.4%
+Mass-90 attributed cells,220,0.78 (0.71–0.84),0.82,-0.039 (-0.105 to +0.028),0.6% (44/44),45.7%
+All cluster 10 cells,32,0.83 (0.77–0.89),0.83,+0.004 (-0.035 to +0.046),42.1% (42/44),60.4%
+All cluster 20 cells,23,0.82 (0.74–0.88),0.82,-0.006 (-0.018 to +0.004),54.1% (39/44),52.5%
+All cluster 21 cells,31,0.82 (0.75–0.89),0.83,-0.005 (-0.025 to +0.015),56.1% (39/44),48.9%

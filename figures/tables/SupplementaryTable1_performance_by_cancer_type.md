@@ -17,4 +17,4 @@
 | Colon | 3 | 0.91 | 66.7% (2/3; 20.8–93.9) | 66.7% (2/3; 20.8–93.9) |
 | Leptomeningeal | 2 | 0.77 | 50.0% (1/2; 9.5–90.5) | 50.0% (1/2; 9.5–90.5) |
 
-Each cancer type versus the same 44 non-cancer controls. AUROC 95% CIs from a stratified patient bootstrap (4,000 replicates); not given for types with fewer than 10 patients, which are descriptive. Sensitivity at the common cut-offs set on the pooled ROC at 90% and 95% specificity (achieved 40/44 and 42/44), with Wilson 95% intervals.
+Each cancer type versus the same 44 non-cancer controls; AUROCs for different cancer types share these controls and are therefore correlated. AUROC 95% CIs from a stratified patient bootstrap (4,000 replicates); not given for types with fewer than 10 patients, which are descriptive. Sensitivity at the common cut-offs set on the pooled ROC at 90% and 95% specificity (achieved 40/44 and 42/44), with Wilson 95% intervals.

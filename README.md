@@ -46,6 +46,7 @@ The release contains no patient identifiers, no clinical information other than 
 | `model/depth_comparison/` | Three- versus six-layer comparison |
 | `model/test_evaluation/` | Single evaluation of the locked model on the held-out test set |
 | `model/bootstrap_ci/`, `model/batch_effects/`, `model/allgroup_oof/` | Confidence intervals, scanner and batch checks, all-tube supplementary endpoint |
+| `robustness/` | Study, site and acquisition checks, leukocyte negative control, cell and cluster removal reporting, cluster 10 image features, CK-gate grid and permutation tests (revision analyses) |
 | `baselines/` | Matched MIL baselines, cell-count baseline, CK-gate and CTC-like count comparators |
 | `attribution/` | AttnLRP attribution, Leiden atlas of attributed cells, cell removal, attribution sanity checks |
 | `adaptation/` | Disease-specific adaptation (lung nodules, BRCA carriers) |

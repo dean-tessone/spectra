@@ -1,4 +1,4 @@
-"""Supplementary Fig. 4 - gallery of attributed cells for every atlas cluster: many small tiles per cluster, 40x re-images first,
+"""Supplementary Fig. 5 - gallery of attributed cells for every atlas cluster: many small tiles per cluster, 40x re-images first,
 then 10x crops (rule-based selection, attribution/atlas/gallery_many.py)."""
 import textwrap
 import numpy as np
@@ -28,8 +28,8 @@ def build():
             sx.scalebar(ax, im.shape[0], field / im.shape[0], um=10, lw=.6)
             for sp in ax.spines.values():
                 sp.set_visible(True); sp.set_color(INK); sp.set_linewidth(.4)
-    sx.export(pg, 'supplementary', 'SupplementaryFig4_cluster_gallery')
-    k.groupby('cluster').head(N).groupby(['cluster', 'source']).size().unstack(fill_value=0).rename(index=NUM).sort_index().to_csv(sx.ROOT / 'supplementary/SupplementaryFig4_tiles_per_cluster_source.csv')
+    sx.export(pg, 'supplementary', 'SupplementaryFig5_cluster_gallery')
+    k.groupby('cluster').head(N).groupby(['cluster', 'source']).size().unstack(fill_value=0).rename(index=NUM).sort_index().to_csv(sx.ROOT / 'supplementary/SupplementaryFig5_tiles_per_cluster_source.csv')
 
 
 if __name__ == '__main__':

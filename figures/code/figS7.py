@@ -1,4 +1,4 @@
-"""Supplementary Fig. 5 - cell embeddings carry diagnostic information within clusters, beyond cluster abundance
+"""Supplementary Fig. 6 - cell embeddings carry diagnostic information within clusters, beyond cluster abundance
 (attribution/atlas/embedding_beyond_composition.py)."""
 import numpy as np
 import pandas as pd
@@ -10,7 +10,8 @@ from fig3 import PAL, cap, L
 
 def build():
     sx.style()
-    w = pd.read_csv(L / 'within_cluster_embedding_auc.csv')
+    # revision 2026-11-17: 2,000 label permutations per cluster (robustness/within_cluster_permutations.py)
+    w = pd.read_csv(sx.REPO / 'analyses/revision_20261117/within_cluster_permutations/within_cluster_embedding_auc_2000perm.csv')
     names = pd.read_csv(L / 'cluster_names.csv', index_col=0).name
     w = w.sort_values('within_cluster_embedding_auc', ascending=False).reset_index(drop=True)
     K = len(w)
@@ -50,18 +51,19 @@ def build():
         c = int(r.cluster); nom = r.permutation_p < .05
         b.scatter([r.abundance_auc], [r.within_cluster_embedding_auc], s=22, color=PAL[c % len(PAL)], edgecolor=INK if nom else 'none', lw=.5, zorder=3)
     for _, r in w[w.permutation_q < .05].iterrows():
-        left = int(r.number) == 4   # cluster 12 sits just to its right
-        b.annotate(f'{int(r.number)}', (r.abundance_auc, r.within_cluster_embedding_auc), xytext=(-4 if left else 4, 2), textcoords='offset points',
-                   fontsize=5.8, fontweight='bold', ha='right' if left else 'left')
+        n_ = int(r.number)   # manual offsets where labelled points crowd (4/12, 15/22, 7)
+        dx, dy, ha = {4: (-5, 2, 'right'), 15: (-3, 5, 'right'), 22: (5, 5, 'left'), 7: (-6, -2, 'right'), 12: (0, 6, 'center'), 23: (0, 6, 'center')}.get(n_, (5, 3, 'left'))
+        b.annotate(f'{n_}', (r.abundance_auc, r.within_cluster_embedding_auc), xytext=(dx, dy), textcoords='offset points',
+                   fontsize=5.8, fontweight='bold', ha=ha)
     b.set_xlim(.3, .8); b.set_ylim(.3, .8); b.set_aspect('equal')
     for ax_ in (b,):
         ax_.set_xticks([.3, .5, .7]); ax_.set_yticks([.3, .5, .7]); ax_.set_xticklabels(['0.3', '0.5', '0.7']); ax_.set_yticklabels(['0.3', '0.5', '0.7'])
     b.set_xlabel('Cluster abundance AUROC'); b.set_ylabel('Within-cluster embedding AUROC')
     b.text(.31, .79, 'Embedding better\nthan abundance', ha='left', va='top', fontsize=5.6, color=MUTED, linespacing=1.1)
 
-    sx.export(pg, 'supplementary', 'SupplementaryFig5_within_cluster_embeddings')
+    sx.export(pg, 'supplementary', 'SupplementaryFig6_within_cluster_embeddings')
     w[['number', 'patients', 'controls', 'abundance_auc', 'within_cluster_embedding_auc', 'permutation_p', 'permutation_q']].sort_values('number').to_csv(
-        sx.ROOT / 'supplementary/SupplementaryFig5_source.csv', index=False)
+        sx.ROOT / 'supplementary/SupplementaryFig6_source.csv', index=False)
 
 
 if __name__ == '__main__':
