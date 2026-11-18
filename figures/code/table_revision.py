@@ -54,7 +54,7 @@ def table2():
 CT_ORDER = ['Prostate', 'Breast', 'Lung', 'Bladder', 'Upper Tract Urothelial Carcinoma', 'Multiple Myeloma', 'Pancreatic', 'Uveal Melanoma',
             'Bone', 'HeadNeck', 'Colon', 'Ovarian', 'Leptomeningeal Disease (LMD)']
 CT_NAME = {'Upper Tract Urothelial Carcinoma': 'UTUC', 'Multiple Myeloma': 'Myeloma and related states', 'Uveal Melanoma': 'Uveal melanoma',
-           'Bone': 'Bone tumours', 'HeadNeck': 'Head and neck', 'Leptomeningeal Disease (LMD)': 'Leptomeningeal disease'}
+           'Bone': 'Bone tumors', 'HeadNeck': 'Head and neck', 'Leptomeningeal Disease (LMD)': 'Leptomeningeal disease'}
 TRIAL = {'SWOG S1416 sites': 'SWOG S1416', 'NRG-BR002 sites': 'NRG-BR002', 'Gilead sites': 'Gilead'}
 
 

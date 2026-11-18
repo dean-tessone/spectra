@@ -46,7 +46,7 @@ GAIN = '#2F8F5B'; LOSS = '#B4483C'
 CH = dict(DAPI='#3D6FD9', CK='#E0443A', CD45='#3FAE5A', VIM='#9AA3A8')  # channel swatches (display convention)
 
 SHORT = {'Upper Tract Urothelial Carcinoma': 'UTUC', 'Multiple Myeloma': 'Myeloma & related', 'Uveal Melanoma': 'Uveal melanoma',
-         'HeadNeck': 'Head and neck', 'Leptomeningeal Disease (LMD)': 'Leptomeningeal', 'Bone': 'Bone tumours',
+         'HeadNeck': 'Head and neck', 'Leptomeningeal Disease (LMD)': 'Leptomeningeal', 'Bone': 'Bone tumors',
          'Control': 'Non-cancer controls'}
 CANCER_COL = {'Prostate': '#3F6E9E', 'Breast': '#C4687A', 'Lung': '#3E8C74', 'Bladder': '#8C73B0',
               'Upper Tract Urothelial Carcinoma': '#B88A3E', 'Multiple Myeloma': '#5F8FB7', 'Pancreatic': '#C27A4D',
