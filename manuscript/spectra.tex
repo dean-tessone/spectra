@@ -523,64 +523,30 @@ Leptomeningeal & 2 & 0.77 & 50.0\% (1/2; 9.5--90.5) & 50.0\% (1/2; 9.5--90.5) \\
 \clearpage
 \begin{table}[p]
 \centering
-\caption{\textbf{Studies, collection sites and acquisition.} Patients per study in the training and held-out test partitions. Reference controls form the primary comparison; reserved controls (lung-nodule work-up in SU, JN2 and JN2-R; BRCA-variant carriers in INTC09) were used only for the adaptation analyses (Fig.~\ref{fig:6}). Collection site from laboratory records; multi-site trials are listed as trial sites; JN-family patients were collected through USC and Billings Clinic without a per-patient record. Scan years and scanners from slide acquisition metadata. Tube, blood collection tube type (EPIC controls: type not recorded, retained by a predefined exception). Role: Cancer, cancer patients; Reference, reference controls; Reserved, reserved controls. NR, not recorded.}
+\caption{\textbf{Studies and collection sites.} Patients by cancer type and control source in the training and held-out test partitions, with the number of contributing studies and their collection sites (from laboratory records; multi-site trials are listed as trial sites; sites ordered by number of patients). Reference controls (Scripps normal donors, Epic Sciences, Cedars-Sinai INTC17-C and benign pancreatic work-up) form the primary comparison; reserved controls were used only for the adaptation analyses (Fig.~\ref{fig:6}). JN-family lung patients were collected through USC and Billings Clinic without a per-patient record and are listed under USC. Per-study counts, scan years, scanners and tube types are in Supplementary Data 1. NR, not recorded.}
 \label{stab:2}
-\scriptsize
-\setlength{\tabcolsep}{3pt}
-\renewcommand{\arraystretch}{0.92}
-\begin{tabular}{l L{2.1cm} L{2.2cm} L{2.2cm} C{1.3cm} C{1.3cm} L{1.5cm} L{2.2cm} L{1.0cm}}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{L{3.5cm} C{1.1cm} L{8.2cm} C{1.9cm}}
 \toprule
-Study & Role & Site & Cancer type & Cancers (train/test) & Controls (train/test) & Scan years & Scanners & Tube \\
+Group & Studies & Collection sites & Patients (train / test) \\
 \midrule
-0S-16-8 & Cancer & USC & Head and neck, lung & 25 / 11 & 0 / 0 & 2019--2024 & BZ3, BZ4, BZ5 & Streck \\
-2N-19-3 & Cancer & USC & Lung & 1 / 0 & 0 / 0 & 2021 & BZ3 & Streck \\
-ATEZ & Cancer & USC & Lung & 2 / 2 & 0 / 0 & 2024 & BZ3, BZ5 & Streck \\
-ATEZ-R & Cancer & USC & Lung & 1 / 0 & 0 / 0 & 2024 & BZ5 & Streck \\
-BC-OPT & Cancer & Billings Clinic & Breast & 103 / 50 & 0 / 0 & 2019--2023 & BZ3, BZ4, BZ5 & Streck \\
-BP007 & Cancer & Anne Arundel, Walter Reed & Breast & 35 / 18 & 0 / 0 & 2019--2025 & BZ3, BZ4, BZ5 & Streck \\
-CART-O & Cancer & City of Hope & Ovarian & 7 / 3 & 0 / 0 & 2023--2025 & BZ3, BZ5 & Streck \\
-CART-P & Cancer & City of Hope & Prostate & 7 / 8 & 0 / 0 & 2019--2025 & BZ3, BZ4, BZ5 & Streck \\
-CART-UP & Cancer & UPenn & Prostate & 5 / 1 & 0 / 0 & 2024--2025 & BZ3, BZ5 & Streck \\
-CH-OPT & Cancer & City of Hope & Breast & 4 / 3 & 0 / 0 & 2020--2023 & BZ3, BZ4, BZ5 & Streck \\
-CHLA-OS & Cancer & CHLA & Bone & 15 / 7 & 0 / 0 & 2019--2024 & BZ3, BZ4, BZ5 & Streck \\
-D-OPT & Cancer & Duke & Breast & 24 / 12 & 0 / 0 & NR & NR & NR \\
-ENZA1 & Cancer & University of Colorado & Breast & 18 / 7 & 0 / 0 & 2019--2020 & BZ3, BZ4, BZ5 & Streck \\
-GS & Cancer & Gilead sites & Colon & 7 / 3 & 0 / 0 & 2019 & BZ3, BZ4, BZ5 & Streck \\
-INTC17 & Cancer & Cedars-Sinai & Breast & 17 / 4 & 0 / 0 & 2024--2025 & BZ3, BZ5 & Streck \\
-JHHBa & Cancer & Johns Hopkins & Bladder, Prostate & 17 / 11 & 0 / 0 & 2019--2020 & BZ3, BZ4, BZ5 & Streck \\
-JN & Cancer & USC & Lung & 6 / 2 & 0 / 0 & 2020--2021 & BZ4, BZ5 & Streck \\
-KETA & Cancer & MSKCC & Lung & 18 / 5 & 0 / 0 & 2024 & BZ3, BZ5 & Streck \\
-LMD & Cancer & City of Hope & Leptomeningeal disease & 1 / 2 & 0 / 0 & 2022--2023 & BZ3, BZ5 & Streck \\
-M-OPT-P & Cancer & MD Anderson & Breast & 3 / 0 & 0 / 0 & 2023 & BZ5 & Streck \\
-MCCT-039 & Cancer & UCSD & Bladder & 8 / 2 & 0 / 0 & 2019 & BZ3, BZ4, BZ5 & Streck \\
-MDA-AVPC & Cancer & MD Anderson & Prostate & 42 / 15 & 0 / 0 & 2020--2022 & BZ3, BZ4, BZ5 & Streck \\
-MDAnd & Cancer & MD Anderson & Prostate & 516 / 213 & 0 / 0 & 2019--2023 & BZ3, BZ4, BZ5 & Streck \\
-MM02 & Cancer & MD Anderson & Multiple Myeloma & 48 / 23 & 0 / 0 & 2019--2022 & BZ3, BZ4, BZ5 & Streck \\
-MSM-GHS & Cancer & Morehouse/Grady & Prostate & 22 / 15 & 0 / 0 & 2025 & BZ3, BZ5 & Streck \\
-MSM-UAB & Cancer & UAB & Prostate & 2 / 2 & 0 / 0 & 2025 & BZ3, BZ5 & Streck \\
-NRG-BR002 & Cancer & NRG-BR002 sites & Breast & 49 / 15 & 0 / 0 & 2019--2026 & BZ3, BZ4, BZ5, BZ6 & Streck \\
-PANC & Cancer & Cedars-Sinai & Pancreatic & 12 / 7 & 0 / 0 & 2021--2022 & BZ3, BZ4, BZ5 & Streck \\
-PANC-M & Cancer & Mayo Clinic & Pancreatic & 2 / 1 & 0 / 0 & 2024 & BZ3, BZ5 & Streck \\
-PANCEUS & Cancer & Cedars-Sinai & Pancreatic & 31 / 11 & 0 / 0 & 2022--2025 & BZ3, BZ5 & Streck \\
-PDMS\_P & Cancer & USC & Bladder & 1 / 2 & 0 / 0 & 2019 & BZ3, BZ4 & Streck \\
-S1222 & Cancer & NR & Breast & 24 / 9 & 0 / 0 & NR & NR & NR \\
-S1416 & Cancer & SWOG S1416 sites & Breast & 226 / 79 & 0 / 0 & 2019--2025 & BZ3, BZ4, BZ5 & Streck \\
-TLP & Cancer & University of Colorado & Breast & 23 / 20 & 0 / 0 & 2019--2023 & BZ3, BZ4, BZ5 & Streck \\
-U-OPT & Cancer & USC & Breast & 1 / 0 & 0 / 0 & 2020 & BZ4 & Streck \\
-U-OPT-P & Cancer & USC & Breast & 4 / 1 & 0 / 0 & 2023 & BZ3, BZ5 & Streck \\
-UM & Cancer & Manchester & Lung & 8 / 6 & 0 / 0 & 2019 & BZ3, BZ4, BZ5 & Streck \\
-USC-BCa & Cancer & USC & Bladder & 106 / 41 & 0 / 0 & 2020--2026 & BZ3, BZ4, BZ5 & Streck \\
-USC-UM & Cancer & USC & Uveal Melanoma & 29 / 12 & 0 / 0 & 2022--2026 & BZ3, BZ5, BZ6 & Streck \\
-USC-UTUC & Cancer & USC & UTUC & 100 / 44 & 0 / 0 & 2021--2026 & BZ3, BZ4, BZ5, BZ6 & Streck \\
-VA & Cancer & UCLA & Prostate & 13 / 6 & 0 / 0 & 2019--2020 & BZ3, BZ4, BZ5 & Streck \\
-JN2 & Cancer + reserved & USC & Lung & 7 / 1 & 26 / 9 & 2020--2022 & BZ3, BZ4, BZ5, BZ6 & Streck \\
-JN2-R & Cancer + reserved & USC & Lung & 3 / 2 & 0 / 2 & 2022--2023 & BZ3, BZ5 & Streck \\
-SU & Cancer + reserved & Stanford & Lung & 96 / 37 & 32 / 12 & NR & NR & NR \\
-EPIC & Reference & Epic Sciences & -- & 0 / 0 & 35 / 16 & 2020--2021 & BZ4, BZ5 & Unknown \\
-INTC17-C & Reference & Cedars-Sinai & -- & 0 / 0 & 15 / 6 & 2024--2025 & BZ3, BZ5 & Streck \\
-NBD & Reference & Scripps & -- & 0 / 0 & 39 / 16 & 2019--2026 & BZ3, BZ4, BZ5, BZ6 & Streck \\
-PANC-Ctrl & Reference & Cedars-Sinai & -- & 0 / 0 & 15 / 6 & 2024--2025 & BZ3, BZ5 & Streck \\
-INTC09 & Reserved & UChicago & -- & 0 / 0 & 14 / 8 & 2024--2025 & BZ3, BZ5 & Streck \\
+Prostate & 8 & MD Anderson, Morehouse/Grady, UCLA, City of Hope, Johns Hopkins, UPenn, UAB & 618 / 264 \\
+Breast & 13 & Billings Clinic, University of Colorado, Duke, Walter Reed, Anne Arundel, Cedars-Sinai, City of Hope, USC, MD Anderson; SWOG S1416 and NRG-BR002 trial sites; one study NR & 531 / 218 \\
+Lung & 10 & Stanford, USC, MSKCC, Manchester & 152 / 62 \\
+Bladder & 4 & USC, Johns Hopkins, UCSD & 121 / 52 \\
+UTUC & 1 & USC & 100 / 44 \\
+Myeloma and related states & 1 & MD Anderson & 48 / 23 \\
+Pancreatic & 3 & Cedars-Sinai, Mayo Clinic & 45 / 19 \\
+Uveal melanoma & 1 & USC & 29 / 12 \\
+Bone tumours & 1 & CHLA & 15 / 7 \\
+Head and neck & 1 & USC & 15 / 4 \\
+Colon & 1 & Gilead trial sites & 7 / 3 \\
+Ovarian & 1 & City of Hope & 7 / 3 \\
+Leptomeningeal disease & 1 & City of Hope & 1 / 2 \\
+Reference controls & 4 & Scripps, Epic Sciences, Cedars-Sinai & 104 / 44 \\
+Lung-nodule work-up (reserved) & 3 & Stanford, USC & 58 / 23 \\
+BRCA-variant carriers (reserved) & 1 & UChicago & 14 / 8 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -593,7 +559,7 @@ INTC09 & Reserved & UChicago & -- & 0 / 0 & 14 / 8 & 2024--2025 & BZ3, BZ5 & Str
 \footnotesize
 \setlength{\tabcolsep}{4pt}
 \textbf{a}\par\smallskip
-\begin{tabular}{L{3.2cm} C{1.4cm} L{2.3cm} C{1.5cm} L{3.4cm} L{2.4cm} C{1.7cm}}
+\begin{tabular}{L{3.1cm} C{1.4cm} L{2.3cm} C{1.5cm} L{3.4cm} L{2.4cm} C{1.7cm}}
 \toprule
 Cells removed & Median per cancer patient & AUROC (95\% CI) & AUROC, matched random & Difference vs random (95\% CI) & Sensitivity at original 90\% cut-off (controls below) & Sensitivity at re-estimated 90\% cut-off \\
 \midrule
