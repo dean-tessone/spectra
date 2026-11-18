@@ -54,6 +54,7 @@ The release contains no patient identifiers, no clinical information other than 
 | `cohort/` | Control-population policy and manuscript tables |
 | `data_release/` | Export of the Zenodo release |
 | `figures/` | Final figures (`main/`, `supplementary/`; PDF, SVG and PNG), legends and figure code (`code/`) |
+| `manuscript/` | LaTeX source of the manuscript and Supplementary Information (`make` builds the PDF) |
 
 Each analysis folder writes its outputs to `runs/` and `analyses/`. These folders are not part of the repository.
 
