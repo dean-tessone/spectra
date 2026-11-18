@@ -1,6 +1,6 @@
 # Manuscript
 
-`spectra.tex` is the LaTeX source of the SPECTRA manuscript, with the main figures, tables, references and Supplementary Information (Supplementary Figs. 1–6 and Supplementary Table 1).
+`spectra.pdf` is the compiled manuscript; `spectra.tex` is its LaTeX source of the SPECTRA manuscript, with the main figures, tables, references and Supplementary Information (Supplementary Figs. 1–6 and Supplementary Table 1).
 
 Build the PDF with:
 

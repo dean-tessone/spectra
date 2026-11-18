@@ -440,48 +440,49 @@ We would like to acknowledge all of the patients who donated samples to our stud
 \renewcommand{\figurename}{Supplementary Fig.}
 \renewcommand{\tablename}{Supplementary Table}
 
-\begin{figure}[!tbp]
+\begin{figure}[!htb]
 \centering
 \fig{SupplementaryFig1.pdf}
 \caption{\textbf{From blood slide to model input.} \pnl{a}, Training data of the frozen BLUE v2 cell encoder: 691 slides from 507 patients across 10 cancer types and two non-cancer conditions (*), 3.8 million rare-event crops ($75\times75$ pixels; DAPI, cytokeratin, CD45/CD31, vimentin and the cell mask) after leukocyte depletion; ResNet-18 trained by contrastive learning (SimCLR) without labels for 100 epochs, giving a 512-number profile per cell. The encoder predates this study's patient split, so some study patients may be among its training slides; it never saw diagnosis labels. \pnl{b}, Cells per patient for every primary-analysis patient (2,550; summed over the patient's analysed slides, two for 2,467 patients and one for 83), from about 5 million nucleated cells (about 2.5 million per slide; typical count, not measured) to 10,000 rare-event candidates per slide (20,000 for two slides), those passing the image-quality filter (unusable probability $\le$0.465) and those also passing the leukocyte (score $<$0.9) and fluorescence-intensity (TRITC, FITC or CY5 mean $\ge$5,000) filters, which SPECTRA reads. \pnl{c}, The cells SPECTRA reads per patient, by frozen BLUE v2 ten-class classifier call (CTC-like = imCTC, CTC and pcCTC classes; immune-like = lymphocyte, granulocyte and monocyte classes), and CK-gated cells (CK $>$40,000 and CD45/CD31 $<$10,000). Violins, distribution over patients; numbers, medians (medians do not sum to the total). Classifier calls and gates describe phenotypes, not confirmed cell identities.}
 \label{sfig:1}
 \end{figure}
 
-\begin{figure}[!tbp]
+\begin{figure}[p]
 \centering
 \fig{SupplementaryFig2.pdf}
 \caption{\textbf{Benchmark and score diagnostics.} \pnl{a}, Matched three-fold, two-seed training-cohort CV (15 epochs, fixed budget); points, folds; bar, mean. Count model: cubic spline on log total model-input events. \pnl{b}, Same-fold SPECTRA minus baseline. \pnl{c}, Test seed agreement: 86\% of single-seed probabilities are $<$0.02 or $>$0.98; seeds agree on most cancers but split nearly uniformly on controls. \pnl{d}, Score is unrelated to model-input cell number. \pnl{e}, Test AUROC by sample-group endpoint; primary group reported. \pnl{f}, Acquisition batch check on the test cohort (no refits): AUROC counting only cancer--control pairs scanned on the same scanner (BZ3, BZ4 or BZ5; 9,996 pairs), in the same calendar year, within 180 days of each other, or in the same quartile of DAPI exposure (set automatically by the scanner per slide), versus all pairs (dashed). Scores do not differ by scanner within cancers (Kruskal--Wallis $p=0.33$) or within controls ($p=0.45$) and are unrelated to scan date (Spearman $\rho$ 0.00 cancers, 0.25 controls); score remains predictive after adjusting for scanner and scan year (likelihood-ratio $p<10^{-16}$). Each tube is processed as its own experiment, so processing batch cannot be separated from patient.}
 \label{sfig:2}
 \end{figure}
 
-\begin{figure}[!tbp]
+\begin{figure}[p]
 \centering
 \fig{SupplementaryFig3.pdf}
 \caption{\textbf{Attribution sanity checks.} \pnl{a}, Cascading model randomization (inference only; 44 non-cancer controls and 76 randomly chosen cancers from the test cohort): layers of each locked model are re-initialized with default initializers from the classifier downward and AttnLRP is recomputed (three-seed mean, as in Fig.~\ref{fig:3}). Lines show median per-patient agreement with the trained-model map. Re-initializing only the classifier drops the signed rank correlation from 1 to 0.33; attribution magnitude and the top-50 cell set are partly retained (0.52 overlap) until the first transformer block is re-initialized, after which agreement falls to chance (random top-50 overlap 0.03). So which cells count for or against cancer depends on the trained readout, while about half of the most-attributed cells are cells that stand out in the learned early representation. Dashed line, top-50 overlap between independently trained seeds (0.20): single-cell rankings are model-specific, which is why cell-level results are reported as three-seed means and summarised by cluster. \pnl{b}, Cluster emphasis (Fig.~\ref{fig:3}b) recomputed from each seed's own attributed cells against the three-seed value; seed-to-seed rank correlation 0.63--0.77; 15 of 23 clusters have the same direction in all three seeds, including the vimentin-high large (10, 11), CK+ (18--21) and CD45/31 (5, 13) clusters discussed in the text. \pnl{c}, How concentrated the evidence is: share of each patient's positive attribution carried by its top-ranked cells (lines, median; bands, interquartile range; 713 cancers, 44 non-cancer controls). In cancers, half of the positive evidence sits in a median of 15 cells (about 1\% of the cells read), 75\% in 70 and 90\% in 220; the 90\% set used for the atlas (Fig.~\ref{fig:3}) is therefore broader than the core evidence. Cluster emphasis keeps its direction at stricter cut-offs (Spearman with the 90\% set: top 10 cells 0.77, top 50 0.88, 75\% 0.92).}
 \label{sfig:3}
 \end{figure}
 
-\begin{figure}[!tbp]
+\begin{figure}[p]
 \centering
 \fig{SupplementaryFig4.pdf}
 \caption{\textbf{Gallery of attributed cells for every atlas cluster.} Sixteen cells per cluster (numbers and names as in Fig.~\ref{fig:3}) from the cells carrying 90\% of positive attribution in held-out test patients. Cells were chosen by visual review for image quality from each cluster's most-attributed candidates, preferring 40x re-images and using the 10x crops read by SPECTRA where a cluster has few or no 40x re-images (40x tiles come first in each row; clusters 2, 4, 9 and 14 have none). Every 40x crop was centred on the matched cell (Fig.~\ref{fig:3} rule) and checked by eye, with manual adjustment where needed. Every tile shows the same 35~$\mu$m field (40x, 0.18~$\mu$m per pixel; 10x, 0.59~$\mu$m per pixel); bars, 10~$\mu$m. Display as in Fig.~\ref{fig:3} (CK red, CD45/CD31 green, DAPI blue, vimentin white; dim tiles linearly brightened). The selection is for presentation and is not a random or representative sample; cluster 9 consists largely of out-of-focus objects.}
 \label{sfig:4}
 \end{figure}
 
-\begin{figure}[!tbp]
+\begin{figure}[p]
 \centering
 \fig{SupplementaryFig5.pdf}
 \caption{\textbf{Cell embeddings carry diagnostic information within clusters, beyond cluster abundance.} Held-out test cohort (713 cancer patients, 44 non-cancer controls), using all model-input cells of each patient; no attribution or SPECTRA scores enter this analysis. \pnl{a}, For each Fig.~\ref{fig:3} cluster, AUROC for separating cancer patients from controls by two measures. Open grey: the cluster's share of each patient's input cells (abundance; Fig.~\ref{fig:3}b). Teal: the mean embedding (first 50 principal components of the normalized BLUE v2 embedding) of the patient's cells in that cluster alone (within-cluster embedding; logistic regression, $C=0.1$, class-balanced, mean over $5\times5$ repeated stratified cross-validation within the test cohort). Patients with fewer than three cells in a cluster are left out for that cluster. Filled teal, label-permutation $P<0.05$ (200 permutations); asterisk, Benjamini--Hochberg $q<0.05$. Clusters are ordered by within-cluster embedding AUROC. \pnl{b}, The same two AUROCs per cluster, plotted against each other; points above the diagonal separate patients better by embedding than by abundance. Black outline, $P<0.05$; numbered, $q<0.05$. Because the embedding measure excludes cell counts, separation reflects differences in the embeddings of cells assigned to the same population. Exploratory; the smallest attainable permutation $P$ is 0.005.}
 \label{sfig:5}
 \end{figure}
 
-\begin{figure}[!tbp]
+\begin{figure}[p]
 \centering
 \fig{SupplementaryFig6.pdf}
 \caption{\textbf{Adaptation methods compared.} Lung cancer versus benign lung nodules and breast cancer versus BRCA carriers without cancer (Fig.~\ref{fig:6}), each adapted with a fixed recipe on the task's training patients only. Methods: the unchanged pan-cancer model; refitting only the decision layer on the frozen model's patient summary (logistic regression, $C=0.1$, class-balanced; used in Fig.~\ref{fig:6}); retraining the last transformer block together with the decision layer; and low-rank adapters (LoRA; query and value projections, rank 4, alpha 8, all six blocks) trained together with the decision layer. Network adaptations used one fixed budget (5 epochs of 64 updates, AdamW, learning rate $5\times10^{-5}$), not tuned. \pnl{a}, Held-out test AUROC (three-model ensemble) with 95\% CIs from a stratified patient bootstrap ($B=4{,}000$); test, 62 lung cases and 23 controls, 218 breast cases and 8 controls. Paired gain over the unchanged model, lung: decision layer 0.10 ($-0.04$ to 0.24), last block 0.07 ($-0.02$ to 0.16), LoRA 0.05 ($-0.04$ to 0.14); breast: 0.35 (0.10 to 0.62), 0.28 (0.10 to 0.46), 0.05 (0.01 to 0.09). \pnl{b}, Training-cohort cross-validation (three folds, each adapting the fold's source model; open circles, folds; line, mean). Refitting the decision layer is the simplest method, leaves the cell-reading model unchanged, and performed as well as the methods that retrain part of the network: best on the test set in both tasks, best in breast cross-validation and comparable in lung cross-validation.}
 \label{sfig:6}
 \end{figure}
 
+\clearpage
 \begin{table}[!tbp]
 \centering
 \caption{\textbf{SPECTRA performance by cancer type on the held-out test set.} Each cancer type versus the same 44 non-cancer controls. AUROC 95\% CIs from a stratified patient bootstrap (4,000 replicates); not given for types with fewer than 10 patients, which are descriptive. Sensitivity at the common cut-offs set on the pooled ROC at 90\% and 95\% specificity (achieved 40/44 and 42/44), with Wilson 95\% intervals.}
